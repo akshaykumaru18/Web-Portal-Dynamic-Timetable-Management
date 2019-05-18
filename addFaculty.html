@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="menuStyle.css" />
+<link rel="stylesheet" href="formcss.css"/>
+<script src="addFaculty.js"></script>
+
+<!-- Firebase Initialize-->
+  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCIdVSIBZrq_lSR-HbmFv7E07NiAqzvRfg",
+      authDomain: "dynamic-timetable-7ec4d.firebaseapp.com",
+      databaseURL: "https://dynamic-timetable-7ec4d.firebaseio.com",
+      projectId: "dynamic-timetable-7ec4d",
+      storageBucket: "dynamic-timetable-7ec4d.appspot.com",
+      messagingSenderId: "958961739233"
+    };
+    firebase.initializeApp(config);
+  </script>
+    <script src="index.js"></script>
+<!-- Firebase Initialization over-->
+
+<script type="text/javascript">
+  function initFaculty(){
+
+    var rootRef = firebase.database().ref().child("COMPUTER SCIENCE AND ENGINEERING/Faculty/Lecturers");
+    rootRef.on("child_added", snap =>{
+      var facultyName = snap.child("lecturerName").val();
+      var x = document.getElementById("facultyList");
+      var option = document.createElement("option");
+      option.text = facultyName;
+      x.add(option);
+    //  alert(facultyName);
+    });
+
+  }
+
+  function remove(){
+  //  alert("clicked");
+  var faculty = document.getElementById('facultyList').value;
+    var rootRef = firebase.database().ref().child("COMPUTER SCIENCE AND ENGINEERING/Faculty/Lecturers/" + faculty).remove();
+    var facultyList = document.getElementById('facultyList');
+    facultyList.remove(facultyList.selectedIndex);
+
+  }
+
+
+</script>
+</head>
+<body onload="initFaculty();">
+
+  <div class="menu">
+    <ul>
+      <li><a class="active" href="createTimetable.html">Create Timetable</a></li>
+      <li><a href="addSubject.html">Add Subjects</a></li>
+      <li><a href="addFaculty.html">Add Faculty</a></li>
+      <li><a href="Export.html">Export</a></li>
+      <li><a href="index.html" onclick="logout();">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <center>
+    <div class="addFaculty-container">
+      <h1>Add Faculty</h1>
+      <hr>
+      <label for="FacultyName"><b>Faculty Name</b></label>
+      <input type="text" placeholder="Faculty Name" name="facultyName" id="facultyName" required>
+
+      <label for="ContactNumber"><b>Contact Number</b></label>
+      <input type="text" placeholder="Contact Number" name="contactNumber" id="contactNumber" required>
+
+      <label for="emailId"><b>Email Id</b></label>
+      <input type="text" placeholder="Email Id" name="emailId" id="emailid" required>
+
+      <label for="selectDept"><b>Select Department</b></label>
+      <select id="departments" name="departments" id="departments">
+        <option value="Automobile Engineering" selected>AUTOMOBILE ENGINEERING</option>
+        <option value="Chemical Engineering" >CHEMICAL ENGINEERING</option>
+        <option value="Civil Engineering" >CIVIL ENVIRONMENTAL ENGINEERING</option>
+        <option value="Computer Science And Engineering" >CIVIL ENGINEERING</option>
+        <option value="Electrical And Electronics Engineering" >COMPUTER SCIENCE AND ENGINEERING</option>
+        <option value="Mechanical Welding And Sheet Metal" >MECHANICAL WELDING AND SHEET METAL</option>
+        <option value="Electronics And Communication Engg" >ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+        <option value="Machine Tool Technology" >MACHINE TOOL TECHNOLOGY</option>
+        <option value="Mechanical Engineering" >MECHANICAL ENGINEERING</option>
+        <option value="Instrumentation" >INSTRUMENTATION</option>
+        <option value="Mechatronics" >MECHATRONICS</option>
+        <option value="Heat Power Engineering" >HEAT POWER TECHNOLOGY</option>
+        <option value="Science And Humanity" >SCIENCE AND HUMANITY</option>
+      </select>
+      <center>  <button type="submit" class="submit" onclick="addNewFaculty();"><h3>Add</h3></button> </center>
+    </div>
+
+    <div class="addFaculty-container">
+      <h1>Delete Faculty</h1>
+      <hr>
+    <label for="facultyList"><b>Faculty</b></label>
+    <select id="facultyList" name="facultyList">
+    </select>
+      <center>  <button type="submit" class="submit" onclick="remove();"><h3>Delete</h3></button> </center>
+    </div>
+
+
+</center>
+
+  </div>
+
+
+
+</body>
+</html>

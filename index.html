@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Authentication</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="formcss.css">
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCIdVSIBZrq_lSR-HbmFv7E07NiAqzvRfg",
+      authDomain: "dynamic-timetable-7ec4d.firebaseapp.com",
+      databaseURL: "https://dynamic-timetable-7ec4d.firebaseio.com",
+      projectId: "dynamic-timetable-7ec4d",
+      storageBucket: "dynamic-timetable-7ec4d.appspot.com",
+      messagingSenderId: "958961739233"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="index.js"></script>
+
+</head>
+<body>
+
+  <div id="login_div" class="main-div">
+  <center><img src="images/sjp logo.jpg" alt="sjp" width="200" height="200"></center>
+  <center><h1>Shri Jayachamarajendra Govt. Polytechnic</h1></center>
+    <center><h3>Login</h3></center>
+    <input type="email" placeholder="Email..." id="email_field" required/>
+    <input type="password" placeholder="Password..." id="password_field" required />
+
+    <button onclick="login();">Login</button> <br>
+    
+  </div>
+
+  <div id="user_div" class="loggedin-div">
+  </div>
+
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="menuStyle.css" />
+<link rel="stylesheet" href="formcss.css"/>
+
+<link rel="stylesheet" href="yearpicker.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="yearpicker.js" async></script>
+
+ <script src="addSubject.js"></script>
+<!-- Firebase Initialize-->
+  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCIdVSIBZrq_lSR-HbmFv7E07NiAqzvRfg",
+      authDomain: "dynamic-timetable-7ec4d.firebaseapp.com",
+      databaseURL: "https://dynamic-timetable-7ec4d.firebaseio.com",
+      projectId: "dynamic-timetable-7ec4d",
+      storageBucket: "dynamic-timetable-7ec4d.appspot.com",
+      messagingSenderId: "958961739233"
+    };
+    firebase.initializeApp(config);
+  </script>
+    <script src="index.js"></script>
+<!-- Firebase Initialization over -->
+
+</head>
+<body onload="initSubjects(), initFaculty();">
+
+
+  <div class="menu" w3-include-html="h1.html">
+    <ul>
+      <li><a class="active" href="createTimetable.html">Create Timetable</a></li>
+      <li><a href="addSubject.html">Add Subjects</a></li>
+      <li><a href="addFaculty.html">Add Faculty</a></li>
+      <li><a href="Export.html">Export</a></li>
+      <li><a href="index.html" onclick="logout();">Logout</a></li>
+    </ul>
+
+  </div>
+
+  <div class="container">
+
+
+<center>
+
+    <div class="addFaculty-container">
+
+      <h3>Add Subject</h3>
+      <hr>
+      <label for="batch"><b>Select Year</b></label>
+      <input type="text" class="yearpicker" placeholder="Select Year" id="year" value="">
+      <label for="SubjectName"><b>Subject Name</b></label>
+      <input type="text" placeholder="Subject Name" name="subName" id="subName" required/>
+      <label for="semester"><b>Semester</b></label>
+      <select id="semester" name="semester">
+        <option value="SEMESTER 1" selected>SEMESTER 1</option>
+        <option value="SEMESTER 2" selected>SEMESTER 2</option>
+        <option value="SEMESTER 3" selected>SEMESTER 3</option>
+        <option value="SEMESTER 4" selected>SEMESTER 4</option>
+        <option value="SEMESTER 5" selected>SEMESTER 5</option>
+        <option value="SEMESTER 6" selected>SEMESTER 6</option>
+      </select>
+      <label for="facultyList"><b>Faculty</b></label>
+      <select id="facultyList" name="facultyList">
+      </select>
+
+      <label for="SubjectCode"><b>Subject Code</b></label>
+      <input type="text" placeholder="Subject Code" name="subCode" id="subCode" required />
+
+      <label for="NumOfUnits"><b>Number of Units</b></label>
+      <input type="text" placeholder="Number of Units" name="numUnits" id="numUnits" required />
+
+
+    <center> <button type="submit" class="submit" onclick="addNewSubject();"><h4>Add</h4></button> </center>
+     </div>
+
+    <div class="Subject-list-container">
+
+          <table id="subjectList" border="10px">
+              <tr>
+                <td><center>Subject Name</center></td>
+              </tr>
+          </table>
+    </div>
+</center>
+<!--
+    <div class="addFaculty-container">
+      <h1>Delete Subject</h1>
+      <hr>
+    <label for="subjectList"><b>Select Subject</b></label>
+    <select id="subjectList">
+    </select>
+      <center><button type="submit" class="submit" onclick="remove();"><h3>Delete</h3></button></center>
+     </div>
+-->
+  </div>
+
+</body>
+</html>

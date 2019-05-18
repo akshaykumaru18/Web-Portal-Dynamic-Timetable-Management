@@ -1,0 +1,44 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script lang="javascript" src="xlsx.full.min.js"></script>
+<script lang="javascript" src="FileSaver.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div id="navbar"><span>UPDATING RECORDS IN EXCEL FILE</span></div>
+<div id="wrapper">
+        <table id="mytable">
+                <tr>
+                <th>Student Name</th>
+                <th>Department</th>
+                <th>CET Marks</th>
+                </tr>
+                <tr>
+                <td>Harry</td>
+                <td>CS</td>
+                <td>170</td>
+                </tr>
+                <tr>
+                <td>potter</td>
+                <td>EEE</td>
+                <td>160</td>
+                </tr>
+                </table>
+        <button id="button-a">Create Excel</button>
+</div>
+<script>
+        var wb = XLSX.utils.table_to_book(document.getElementById('mytable'), {sheet:"Sheet JS"});
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+        function s2ab(s) {
+                        var buf = new ArrayBuffer(s.length);
+                        var view = new Uint8Array(buf);
+                        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                        return buf;
+        }
+        $("#button-a").click(function(){
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+        });
+</script>
+</body>
+</html>
